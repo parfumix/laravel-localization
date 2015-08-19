@@ -1,7 +1,14 @@
+# here will be listed all availabel locales .
 locales:
    - en
    - ro
    - ru
 
+# here will be set up default locale .
 fallback:
    en
+
+# here will be described class detectors, they will be called in the same order
+detectors:
+   - Localization\Detectors\Request
+   - Localization\Detectors\Browser
