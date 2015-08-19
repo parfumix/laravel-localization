@@ -19,7 +19,8 @@
   "autoload": {
     "psr-4": {
       "Localization\\": "src/"
-    }
+    },
+    "files": ["helpers.php"]
   },
   "minimum-stability": "dev"
 }
