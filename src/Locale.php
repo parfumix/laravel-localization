@@ -94,16 +94,20 @@ class Locale {
         $locale    = null;
 
         foreach($detectors as $detector) {
-            if(! class_exists($detector)) continue;
+            if(! class_exists($detector))
+                continue;
 
             $detector = new $detector;
 
-            if( ! $detector instanceof Detectable ) continue;
+            if( ! $detector instanceof Detectable )
+                continue;
 
             if( $locale = $detector->detect(
                 $this->getRequest()
-            ) )
-                break;
+            ) ) {
+                if( $this->isValid($locale) )
+                    break;
+            }
         }
 
         if( is_null($locale) )
