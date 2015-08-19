@@ -12,3 +12,4 @@ fallback:
 detectors:
    - Localization\Detectors\Request
    - Localization\Detectors\Browser
+   - Localization\Detectors\System
