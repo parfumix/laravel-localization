@@ -2,19 +2,13 @@
 
 namespace Localization;
 
-use Localization\Detectors\Browser;
-use Localization\Detectors\Request;
-
 class Locale {
 
     protected $fallBack;
 
     protected $locales = [];
 
-    protected $detectors = [
-        Request::class,
-        Browser::class,
-    ];
+    protected $detectors = [];
 
     protected $default;
 

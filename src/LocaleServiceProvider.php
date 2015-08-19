@@ -14,8 +14,10 @@ class LocaleServiceProvider extends Serviceprovider {
         $this->app->bind('laravel-locale', function() use($request) {
             return (new Locale)
                 ->setRequest($request)
+                ->setDetectors(config('laravel-locale.detectors'))
                 ->setLocales(config('laravel-locale.locales'))
-                ->setDefault(config('laravel-locale.fallback'));
+                ->setDefault(config('laravel-locale.fallback'))
+                ->detect();
         });
     }
 
