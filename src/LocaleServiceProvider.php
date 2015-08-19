@@ -17,11 +17,15 @@ class LocaleServiceProvider extends Serviceprovider {
                 ->setDetectors(config('laravel-locale.detectors'))
                 ->setLocales(config('laravel-locale.locales'))
                 ->setDefault(config('laravel-locale.fallback'))
-                ->detect();
+                ->detect(function($locale) {
+
+                });
         });
     }
 
-    public function register() {}
+    public function register() {
+        $this->app->singleton('locale-formatter', Formatter::class);
+    }
 
     #@todo adding helper which will do all that  .
     protected function loadConfiguration() {

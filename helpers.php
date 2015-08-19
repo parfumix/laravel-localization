@@ -31,3 +31,14 @@ function get_active_locale() {
     return app('laravel-locale')
         ->getActiveLocale();
 }
+
+/**
+ * Format locale and return formatter instance ..
+ *
+ * @param $locale
+ * @return mixed
+ */
+function format_locale($locale) {
+    return app('locale-formatter')
+        ->parse($locale);
+}
