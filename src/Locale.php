@@ -2,13 +2,19 @@
 
 namespace Localization;
 
+use Localization\Detectors\Browser;
+use Localization\Detectors\Request;
+
 class Locale {
 
     protected $fallBack;
 
     protected $locales = [];
 
-    protected $detectors;
+    protected $detectors = [
+        Request::class,
+        Browser::class,
+    ];
 
     protected $default;
 
@@ -18,13 +24,13 @@ class Locale {
 
 
     public function addLocales(array $locales = array()) {
-        $this->locales = array_merge($locales, $this->getLocales());
+        $this->locales = array_merge(array_flip($locales), $this->getLocales());
 
         return $this;
     }
 
     public function setLocales(array $locales = array()) {
-        $this->locales = $locales;
+        $this->locales = array_flip($locales);
 
         return $this;
     }
@@ -34,14 +40,11 @@ class Locale {
     }
 
     public function getLocale($locale) {
-        return isset($this->locales[$locale]) ? $this->locales[$locale] : null;
+        return isset($this->locales[$locale]) ? $locale : null;
     }
 
 
     public function setDefault($locale) {
-        if(! $this->isValid($locale))
-            throw new LocaleException(_('Unsupported locale'));
-
         $this->default = $locale;
 
         return $this;
@@ -94,9 +97,13 @@ class Locale {
 
     public function detect(\Closure $onSuccess = null) {
         $detectors = $this->getDetectors();
-        $locale    = $this->getDefault();
+        $locale    = null;
 
         foreach($detectors as $detector) {
+            if(! class_exists($detector)) continue;
+
+            $detector = new $detector;
+
             if( ! $detector instanceof Detectable ) continue;
 
             if( $locale = $detector->detect(
@@ -105,10 +112,13 @@ class Locale {
                 break;
         }
 
+        if( is_null($locale) )
+            $locale = $this->getDefault();
+
         if( $onSuccess && $locale )
             $onSuccess($locale);
 
-        $this->setLocale($locale);
+        $this->setCurrentLocale($locale);
 
         return $this;
     }
