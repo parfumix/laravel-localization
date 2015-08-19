@@ -7,7 +7,8 @@ use Localization\Detectable;
 class Request implements Detectable {
 
     public function detect($request) {
-        // TODO: Implement detect() method.
+        if( $locale = $request->segment(1) )
+            return $locale;
     }
 
 }
