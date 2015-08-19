@@ -29,7 +29,7 @@ function get_default_locale() {
  */
 function get_active_locale() {
     return app('laravel-locale')
-        ->getActiveLocale();
+        ->getCurrentLocale();
 }
 
 /**
