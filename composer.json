@@ -12,6 +12,7 @@
     }
   ],
   "require": {
+    "symfony/yaml": "~2.7",
     "php": ">=5.4.0",
     "laravel/framework": "~5.0"
   },
