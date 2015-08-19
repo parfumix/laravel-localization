@@ -1,0 +1,7 @@
+locales:
+   - en
+   - ro
+   - ru
+
+fallback:
+   en
