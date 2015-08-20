@@ -1,8 +1,14 @@
 # here will be listed all availabel locales .
 locales:
-   - en
-   - ro
-   - ru
+   en:
+    title: Enlgish
+    country: US
+   ro:
+    title: Romanian
+    country: RO
+   ru:
+    title: Russian
+    country: RU
 
 # here will be set up default locale .
 fallback:

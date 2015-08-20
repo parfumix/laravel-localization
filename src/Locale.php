@@ -24,7 +24,7 @@ class Locale {
      * @return $this
      */
     public function addLocales(array $locales = array()) {
-        $this->locales = array_merge(array_flip($locales), $this->getLocales());
+        $this->locales = array_merge($locales, $this->getLocales());
 
         return $this;
     }
@@ -36,7 +36,7 @@ class Locale {
      * @return $this
      */
     public function setLocales(array $locales = array()) {
-        $this->locales = array_flip($locales);
+        $this->locales = $locales;
 
         return $this;
     }

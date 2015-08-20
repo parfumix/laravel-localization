@@ -18,7 +18,9 @@ class LocaleServiceProvider extends Serviceprovider {
                 ->setLocales(config('laravel-locale.locales'))
                 ->setDefault(config('laravel-locale.fallback'))
                 ->detect(function($locale) {
-
+                    app()->setLocale(
+                        $locale
+                    );
                 });
         });
     }
