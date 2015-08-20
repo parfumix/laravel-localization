@@ -4,7 +4,7 @@ namespace Localization;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
-use Symfony\Component\Yaml\Yaml;
+use Flysap\Support;
 
 class LocaleServiceProvider extends Serviceprovider {
 
@@ -33,15 +33,10 @@ class LocaleServiceProvider extends Serviceprovider {
         $this->app->singleton('locale-formatter', Formatter::class);
     }
 
-    #@todo adding helper which will do all that  .
     protected function loadConfiguration() {
-        $array = Yaml::parse(file_get_contents(
-            __DIR__ . '/../configuration/general.yaml'
-        ));
-
-        $config = $this->app['config']->get('laravel-locale', []);
-
-        $this->app['config']->set('laravel-locale', array_merge($array, $config));
+        Support\set_config_from_yaml(
+            __DIR__ . '/../configuration/general.yaml' , 'laravel-locale'
+        );
 
         return $this;
     }
