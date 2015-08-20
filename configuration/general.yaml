@@ -3,12 +3,14 @@ locales:
    en:
     title: Enlgish
     country: US
+    active: true
    ro:
     title: Romanian
     country: RO
+    active: false
    ru:
     title: Russian
-    country: RU
+    active: false
 
 # here will be set up default locale .
 fallback:
