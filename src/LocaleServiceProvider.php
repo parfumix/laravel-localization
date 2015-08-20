@@ -13,8 +13,6 @@ class LocaleServiceProvider extends Serviceprovider {
             __DIR__.'/../configuration' => config_path('yaml/localization'),
         ]);
 
-        $this->loadConfiguration();
-
         $this->app->bind('laravel-locale', function() use($request) {
             return (new Locale)
                 ->setRequest($request)
@@ -30,6 +28,12 @@ class LocaleServiceProvider extends Serviceprovider {
     }
 
     public function register() {
+        $this->loadConfiguration();
+
+        Support\merge_yaml_config_from(
+            config_path('yaml/localization/general.yaml') , 'laravel-locale'
+        );
+
         $this->app->singleton('locale-formatter', Formatter::class);
     }
 
