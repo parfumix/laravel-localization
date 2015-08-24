@@ -1,7 +1,7 @@
 ##Introduction
 
 Laravel localization is an component which easy will help you to detect your locale throught various detectors
-**( see below)**. And first detector which will return an detector will be used as found locale. 
+**(see below)**. And first detector which will return an detector will be used as found locale. 
 
 ### Instalation
 You can use the `composer` package manager to install. From console run:
