@@ -1,7 +1,7 @@
 ##Introduction
 
 Laravel localization is an component which easy will help you to detect your locale throught various detectors
-*( see below). And first detector which will return an locale will be used as found locale. 
+**( see below)**. And first detector which will return an detector will be used as found locale. 
 
 ### Instalation
 You can use the `composer` package manager to install. From console run:
@@ -22,7 +22,7 @@ You have to publish package files using
 
 ### Configuration
 
-To regiter package you have to follow standart procedure registering serviceProvider class and Facade. But for the first open your configuration file located in **config/app.php** and search for array of providers:
+To register package you have to follow standart procedure registering serviceProvider class .Open your configuration file located in **config/app.php** and search for array of providers:
 
 ```php
   'providers' => [
@@ -55,6 +55,7 @@ locales:
 ```
 
 How does component try to detect locale. It goes throught all detectors declared in configuration file and if someone of class will return an valid locale it will be used as founded locale and set up to the application 
+
 ```yaml
 detectors:
    - Localization\Detectors\Request
@@ -83,3 +84,15 @@ class YourDetector implements Detectable {
 
 }
 ```
+
+and add that class to your configuration file
+
+```yaml
+# here will be described class detectors, they will be called in the same order
+detectors:
+   - Your\Namespace\YourDetector
+   - Localization\Detectors\Browser
+   - Localization\Detectors\System
+```
+
+As you can see your detector will be called first.
