@@ -96,3 +96,17 @@ detectors:
 ```
 
 As you can see your detector will be called first.
+
+###Helpers
+
+By default you can use some of helpers which will help you easy to manipulate with locales. Let me describe that helpers .
+
+```php
+Localization\get_locales() // return all registered locales in config file
+
+Localization\get_default_locale() // will return default locale
+
+Localization\get_active_locale() // will return active detected locale
+
+Localization\format_locale() // format your locale and return formatter instance
+```
