@@ -18,6 +18,6 @@ fallback:
 
 # here will be described class detectors, they will be called in the same order
 detectors:
-   - Localization\Detectors\Request
-   - Localization\Detectors\Browser
-   - Localization\Detectors\System
+   request: Localization\Detectors\Request
+   browser: Localization\Detectors\Browser
+   system: Localization\Detectors\System
