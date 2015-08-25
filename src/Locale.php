@@ -175,14 +175,6 @@ class Locale {
         $locale    = null;
 
         foreach($detectors as $detector) {
-            if(! class_exists($detector))
-                continue;
-
-            $detector = new $detector;
-
-            if( ! $detector instanceof Detectable )
-                continue;
-
             if( $locale = $detector->detect(
                 $this->getRequest()
             ) ) {
@@ -209,7 +201,17 @@ class Locale {
      * @return $this
      */
     public function setDetectors(array $detectors = array()) {
-        $this->detectors = $detectors;
+        foreach ($detectors as $alias => $detector) {
+            if(! class_exists($detector))
+                continue;
+
+            $detector = new $detector;
+
+            if( ! $detector instanceof Detectable )
+                continue;
+
+            $this->detectors[$alias] = $detector;
+        }
 
         return $this;
     }
@@ -222,5 +224,17 @@ class Locale {
     public function getDetectors() {
         return $this->detectors;
     }
+
+    /**
+     * Get detector by alias .
+     *
+     * @param $alias
+     * @return mixed
+     */
+    public function getDetector($alias) {
+        if( isset($this->detectors[$alias]) )
+            return $this->detectors[$alias];
+    }
+
 
 }
