@@ -97,6 +97,33 @@ detectors:
 
 As you can see your detector will be called first.
 
+##Laravel integration
+To use that package with laravel routing package you have to edit your configuration file and exclude detectors which you don't need it
+
+```yaml
+
+# That mean Localization will walk through all detectors in the same order from the top to bottom and first locale which will be detected will be set as active locale App::locale('active_locale')
+
+detectors:
+   request: Localization\Detectors\Request // will detect locale from first url segment site.com/ru - ru will 
+   browser: Localization\Detectors\Browser // will detect locale from request headers * optional
+   system: Localization\Detectors\System // will detect locale from system * optional
+```
+
+For segmentation you have to edit your **routes.php** file and follow that structure
+
+```php
+
+// Here we will try detect and set as prefix first url segment . if not founded will be set null and will try to detect from below detectors .
+Route::group(['prefix' => Localization\get_detector_locale('request')], function() {
+  
+  Route::get('/', function() {
+    return view('welcome.blade.php')
+  })
+  
+});
+```
+
 ###Helpers
 
 By default you can use some of helpers which will help you easy to manipulate with locales. Let me describe that helpers .
